@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:interneed/loginPage.dart';
+import 'package:interneed/onBoardingPage.dart';
 import 'package:interneed/dashboard.dart';
 import 'package:interneed/color.dart';
 import 'dart:async';
@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
     var duration = const Duration(seconds: 3);
     return Timer(duration, () {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (c) => widget.user ?  Dashboard() : Login()),
+        MaterialPageRoute(builder: (c) => widget.user ?  Dashboard() : OnBoardingPage()),
       );
     });
   }
