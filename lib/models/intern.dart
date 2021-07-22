@@ -8,5 +8,13 @@ class Intern {
   String location;
   String applicants;
 
-  Intern({this.company, this.logo, this.position, this.duration, this.location, this.applicants});
+
+  Intern({
+    this.company, 
+    this.logo, 
+    this.position, 
+    this.duration, 
+    this.location, 
+    this.applicants
+    });
 }
