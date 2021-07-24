@@ -2,6 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:interneed/color.dart';
 
 class DetailPage extends StatefulWidget {
+  final company;
+  final logo;
+  final position;
+  final duration;
+  final location;
+  final applicants;
+
+  DetailPage(
+      {this.company,
+      this.logo,
+      this.position,
+      this.duration,
+      this.location,
+      this.applicants});
+
   @override
   _DetailPageState createState() => _DetailPageState();
 }
@@ -64,19 +79,17 @@ class _DetailPageState extends State<DetailPage>
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: 150,
-              width: 150,
-              decoration: BoxDecoration(
-                color: secondaryColor,
-                borderRadius: BorderRadius.circular(
-                  10.0,
-                ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.network(
+                widget.logo ?? "null",
+                height: 150,
+                width: 150,
               ),
             ),
           ),
           Text(
-            'UI Designer Intern',
+            widget.position ?? "null",
             style: TextStyle(
               fontSize: 21,
               fontWeight: FontWeight.w600,
@@ -88,7 +101,7 @@ class _DetailPageState extends State<DetailPage>
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '3 Month',
+                  widget.duration ?? "null",
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -104,7 +117,7 @@ class _DetailPageState extends State<DetailPage>
                         color: mainColor,
                       ),
                       Text(
-                        "Malang",
+                        widget.location ?? "null",
                         style: TextStyle(
                           fontSize: 16,
                           color: textColor,

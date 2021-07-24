@@ -294,8 +294,22 @@ class _DashboardState extends State<Dashboard> {
                                                         Navigator.push(
                                                           context,
                                                           MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  DetailPage()),
+                                                              builder:
+                                                                  (context) =>
+                                                                      DetailPage(
+                                                                        company:
+                                                                            data.company,
+                                                                        logo: data
+                                                                            .logo,
+                                                                        position:
+                                                                            data.position,
+                                                                        duration:
+                                                                            data.duration,
+                                                                        location:
+                                                                            data.location,
+                                                                        applicants:
+                                                                            data.applicants,
+                                                                      )),
                                                         );
                                                       }),
                                                 ),
@@ -372,7 +386,14 @@ class _DashboardState extends State<Dashboard> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => DetailPage()),
+                                            builder: (context) => DetailPage(
+                                                  company: data.company,
+                                                  logo: data.logo,
+                                                  position: data.position,
+                                                  duration: data.duration,
+                                                  location: data.location,
+                                                  applicants: data.applicants,
+                                                )),
                                       );
                                     },
                                     child: Container(
