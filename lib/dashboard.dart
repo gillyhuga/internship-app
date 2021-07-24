@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:interneed/color.dart';
 import 'data/dataIntern.dart';
 import 'package:interneed/loginPage.dart';
+import 'package:interneed/detailPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Dashboard extends StatefulWidget {
@@ -27,12 +28,13 @@ class _DashboardState extends State<Dashboard> {
     });
   }
 
-    void _logOut() async {
+  void _logOut() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove('user');
     prefs.setString('username', username);
     prefs.setString('fullname', fullname);
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (c) => Login()));
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (c) => Login()));
   }
 
   @override
@@ -88,7 +90,8 @@ class _DashboardState extends State<Dashboard> {
                           ),
                         ),
                         Spacer(),
-                        IconButton(icon: Icon(Icons.logout), onPressed: _logOut),
+                        IconButton(
+                            icon: Icon(Icons.logout), onPressed: _logOut),
                       ],
                     ),
                   ),
@@ -264,29 +267,37 @@ class _DashboardState extends State<Dashboard> {
                                                 SizedBox(
                                                   width: 100,
                                                   child: TextButton(
-                                                    child: Text(
-                                                      "Apply",
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.w800),
-                                                    ),
-                                                    style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStateProperty
-                                                              .all<Color>(
-                                                                  mainColor),
-                                                      shape: MaterialStateProperty.all<
-                                                              RoundedRectangleBorder>(
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(20.0),
-                                                      )),
-                                                    ),
-                                                    onPressed: null,
-                                                  ),
+                                                      child: Text(
+                                                        "Apply",
+                                                        style: TextStyle(
+                                                            fontSize: 12,
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w800),
+                                                      ),
+                                                      style: ButtonStyle(
+                                                        backgroundColor:
+                                                            MaterialStateProperty
+                                                                .all<Color>(
+                                                                    mainColor),
+                                                        shape: MaterialStateProperty.all<
+                                                                RoundedRectangleBorder>(
+                                                            RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      20.0),
+                                                        )),
+                                                      ),
+                                                      onPressed: () {
+                                                        Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  DetailPage()),
+                                                        );
+                                                      }),
                                                 ),
                                                 Spacer(),
                                                 Padding(
@@ -356,83 +367,94 @@ class _DashboardState extends State<Dashboard> {
                                 return Card(
                                   semanticContainer: true,
                                   clipBehavior: Clip.antiAliasWithSaveLayer,
-                                  child: Container(
-                                    color: secondaryColor,
-                                    height: 100,
-                                    width: double.infinity,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                child: Image.network(
-                                                  data.logo,
-                                                  height: 70,
-                                                  width: 70,
+                                  child: InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => DetailPage()),
+                                      );
+                                    },
+                                    child: Container(
+                                      color: secondaryColor,
+                                      height: 100,
+                                      width: double.infinity,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  child: Image.network(
+                                                    data.logo,
+                                                    height: 70,
+                                                    width: 70,
+                                                  ),
                                                 ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      data.position,
-                                                      style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: textColor,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      data.company,
-                                                      style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: textColor,
-                                                        fontWeight:
-                                                            FontWeight.w800,
-                                                      ),
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        Icon(
-                                                          Icons.location_pin,
-                                                          size: 18,
-                                                          color: mainColor,
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        data.position,
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          color: textColor,
+                                                          fontWeight:
+                                                              FontWeight.w400,
                                                         ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  left: 5),
-                                                          child: Text(
-                                                            data.location,
-                                                            style: TextStyle(
-                                                              fontSize: 12,
-                                                              color: textColor,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400,
+                                                      ),
+                                                      Text(
+                                                        data.company,
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          color: textColor,
+                                                          fontWeight:
+                                                              FontWeight.w800,
+                                                        ),
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Icon(
+                                                            Icons.location_pin,
+                                                            size: 18,
+                                                            color: mainColor,
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    left: 5),
+                                                            child: Text(
+                                                              data.location,
+                                                              style: TextStyle(
+                                                                fontSize: 12,
+                                                                color:
+                                                                    textColor,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                              ),
                                                             ),
                                                           ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
