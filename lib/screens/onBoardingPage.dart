@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:interneed/color.dart';
-import 'package:interneed/loginPage.dart';
+import 'package:interneed/screens/loginPage.dart';
 
 class OnBoardingPage extends StatelessWidget {
   @override

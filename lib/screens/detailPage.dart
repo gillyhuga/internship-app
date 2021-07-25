@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:interneed/color.dart';
-import 'models/intern.dart';
+import '../models/intern.dart';
 
 class DetailPage extends StatefulWidget {
   final Intern intern;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:interneed/color.dart';
-import 'data/dataIntern.dart';
-import 'package:interneed/loginPage.dart';
-import 'package:interneed/detailPage.dart';
+import '../data/dataIntern.dart';
+import 'package:interneed/screens/loginPage.dart';
+import 'package:interneed/screens/detailPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Dashboard extends StatefulWidget {

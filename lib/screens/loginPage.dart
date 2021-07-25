@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:interneed/color.dart';
-import 'package:interneed/dashboard.dart';
+import 'package:interneed/screens/dashboard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'data/dataUser.dart';
+import '../data/dataUser.dart';
 
 class Login extends StatefulWidget {
   @override

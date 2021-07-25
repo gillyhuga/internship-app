@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:interneed/onBoardingPage.dart';
-import 'package:interneed/dashboard.dart';
+import 'package:interneed/screens/onBoardingPage.dart';
+import 'package:interneed/screens/dashboard.dart';
 import 'package:interneed/color.dart';
 import 'dart:async';
 
