@@ -7,6 +7,8 @@ class Intern {
   String duration;
   String location;
   String applicants;
+  List<String> qualification;
+  String description;
 
 
   Intern({
@@ -15,6 +17,8 @@ class Intern {
     this.position, 
     this.duration, 
     this.location, 
-    this.applicants
+    this.applicants,
+    this.qualification,
+    this.description,
     });
 }

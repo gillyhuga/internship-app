@@ -1,21 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:interneed/color.dart';
+import 'models/intern.dart';
 
 class DetailPage extends StatefulWidget {
-  final company;
-  final logo;
-  final position;
-  final duration;
-  final location;
-  final applicants;
+  final Intern intern;
 
-  DetailPage(
-      {this.company,
-      this.logo,
-      this.position,
-      this.duration,
-      this.location,
-      this.applicants});
+  const DetailPage({
+    Key key,
+    this.intern,
+  }) : super(key: key);
 
   @override
   _DetailPageState createState() => _DetailPageState();
@@ -36,6 +29,8 @@ class _DetailPageState extends State<DetailPage>
     super.dispose();
     _tabController.dispose();
   }
+
+  bool isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
@@ -66,8 +61,15 @@ class _DetailPageState extends State<DetailPage>
                   color: secondaryColor,
                   borderRadius: BorderRadius.all(Radius.circular(10))),
               child: IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.favorite, color: Colors.red),
+                icon: Icon(
+                  isFavorite ? Icons.favorite : Icons.favorite_border,
+                  color: Colors.red,
+                ),
+                onPressed: () {
+                  setState(() {
+                    isFavorite = !isFavorite;
+                  });
+                },
               ),
             ),
           ),
@@ -82,14 +84,14 @@ class _DetailPageState extends State<DetailPage>
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.network(
-                widget.logo ?? "null",
+                widget.intern.logo ?? "null",
                 height: 150,
                 width: 150,
               ),
             ),
           ),
           Text(
-            widget.position ?? "null",
+            widget.intern.position ?? "null",
             style: TextStyle(
               fontSize: 21,
               fontWeight: FontWeight.w600,
@@ -101,7 +103,7 @@ class _DetailPageState extends State<DetailPage>
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  widget.duration ?? "null",
+                  widget.intern.duration ?? "null",
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -117,7 +119,7 @@ class _DetailPageState extends State<DetailPage>
                         color: mainColor,
                       ),
                       Text(
-                        widget.location ?? "null",
+                        widget.intern.location ?? "null",
                         style: TextStyle(
                           fontSize: 16,
                           color: textColor,
@@ -174,11 +176,35 @@ class _DetailPageState extends State<DetailPage>
                     decoration: BoxDecoration(
                         color: secondaryColor,
                         borderRadius: BorderRadius.all(Radius.circular(10))),
-                    child: Text(
-                      'Desc',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListView.builder(
+                        itemCount: widget.intern.qualification.length,
+                        itemBuilder: (context, index) {
+                          final qualification =
+                              widget.intern.qualification[index];
+                          return Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Icon(
+                                Icons.circle_outlined,
+                                size: 18,
+                                color: mainColor,
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(left: 5),
+                                width: 275,
+                                child: Text(
+                                  qualification ?? "null",
+                                  maxLines: 2,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
                       ),
                     ),
                   ),
@@ -192,11 +218,14 @@ class _DetailPageState extends State<DetailPage>
                     decoration: BoxDecoration(
                         color: secondaryColor,
                         borderRadius: BorderRadius.all(Radius.circular(10))),
-                    child: Text(
-                      'About Company',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        widget.intern.description ?? "null",
+                        maxLines: 10,
+                        style: TextStyle(
+                          fontSize: 14,
+                        ),
                       ),
                     ),
                   ),
@@ -225,11 +254,75 @@ class _DetailPageState extends State<DetailPage>
                     borderRadius: BorderRadius.circular(10.0),
                   )),
                 ),
-                onPressed: null,
+                onPressed: () => showDialog(
+                  context: context,
+                  builder: (context) => ApplyDialog(),
+                ),
               ),
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class ApplyDialog extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(32.0))),
+      content: new Container(
+        width: 260.0,
+        height: 300.0,
+         
+        
+        child: new Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Container(
+                decoration: new BoxDecoration(
+                  color: Colors.white,
+                ),
+                child: Text(
+                  "Terimakasih, kamu telah berhasil mendaftar program Internship ini !",
+                  maxLines: 10,
+                  style: TextStyle(
+                    fontSize: 14,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+          
+            Expanded(
+                  child: Image.asset('assets/images/wfh_2.png',
+                      width: 500, height: 350, fit: BoxFit.fill),
+                ),
+            SizedBox(
+              width: double.infinity,
+              child: TextButton(
+                  child: Text(
+                    "Back",
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  style: ButtonStyle(
+                    padding: MaterialStateProperty.all<EdgeInsets>(
+                        EdgeInsets.all(10)),
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(mainColor),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    )),
+                  ),
+                 onPressed: () => Navigator.pop(context),),
+            ),
+          ],
+        ),
       ),
     );
   }

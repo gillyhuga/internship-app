@@ -297,18 +297,7 @@ class _DashboardState extends State<Dashboard> {
                                                               builder:
                                                                   (context) =>
                                                                       DetailPage(
-                                                                        company:
-                                                                            data.company,
-                                                                        logo: data
-                                                                            .logo,
-                                                                        position:
-                                                                            data.position,
-                                                                        duration:
-                                                                            data.duration,
-                                                                        location:
-                                                                            data.location,
-                                                                        applicants:
-                                                                            data.applicants,
+                                                                        intern : dataIntern[index],
                                                                       )),
                                                         );
                                                       }),
@@ -371,7 +360,7 @@ class _DashboardState extends State<Dashboard> {
                             ),
                           ),
                           Container(
-                            height: 800,
+                            height: 550,
                             width: double.infinity,
                             child: ListView.builder(
                               physics: const NeverScrollableScrollPhysics(),
@@ -387,12 +376,7 @@ class _DashboardState extends State<Dashboard> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => DetailPage(
-                                                  company: data.company,
-                                                  logo: data.logo,
-                                                  position: data.position,
-                                                  duration: data.duration,
-                                                  location: data.location,
-                                                  applicants: data.applicants,
+                                                 intern : dataIntern[index],
                                                 )),
                                       );
                                     },
